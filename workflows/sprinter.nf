@@ -51,7 +51,7 @@ workflow SPRINTER_PIPELINE{
     rdr_output = RUNRDRESTIMATOR(
         reference_genome,
         reference_genome_fai,
-        reference_genome_dict
+        reference_genome_dict,
         bam,
         bam_bai,
         chromosomes,
@@ -64,7 +64,7 @@ workflow SPRINTER_PIPELINE{
     sprinter_output = GOSPRINTER(
         postrdr_output.chrrdr,
         reference_genome_chr,
-        reference_genome_chr_fai
+        reference_genome_chr_fai,
         sprinter_rtreads,
         sprinter_minreads,
         sprinter_cnreads,
