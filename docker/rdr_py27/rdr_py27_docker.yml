@@ -1,0 +1,25 @@
+name: rdr_py27
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - python=2.7
+  - pip
+  - setuptools=44.0.0
+  - wheel
+  - readline
+  - numpy
+  - pandas
+  - matplotlib
+  - scipy
+  - seaborn
+  - scikit-learn
+  - statsmodels
+  - pip:
+      - subprocess32
+      - pathlib2
+      - typing
+      - zipp
+      - contextlib2
+      - backports-functools-lru-cache

@@ -1,0 +1,83 @@
+#!/bin/bash
+
+PYTHON="/opt/conda/envs/rdr_py27/bin/python"
+SCRIPT="/usr/local/bin/RDREstimator.py"
+
+# Default values
+BINSIZE="5Mb"
+MINREADS=100000
+JOBS=0
+REFERENCE="hg19"
+CELLSLIST=""
+CHROMS="chr1 chr2 chr3 ... chr22"
+CELLPREFIX="CB:Z:"
+CELLSUFFIX=""
+OUTDIR="."
+SAMTOOLS="/opt/conda/envs/rdr_py27/bin/samtools"
+
+# Usage message
+usage() {
+  echo "Usage: $0 -t tumor.bam -n normal.bam -r ref.fa [options]"
+  echo
+  echo "Required:"
+  echo "  -t   Tumor BAM file"
+  echo "  -n   Normal BAM file"
+  echo "  -r   Reference genome FASTA (.fa)"
+  echo
+  echo "Optional:"
+  echo "  -b   Bin size (e.g. 50kb or 5Mb) [default: $BINSIZE]"
+  echo "  -m   Minimum number of reads [default: $MINREADS]"
+  echo "  -j   Number of parallel jobs [default: #CPUs]"
+  echo "  -c   Chromosomes list [default: $CHROMS]"
+  echo "  -l   Cell list file (optional)"
+  echo "  --cellprefix    Barcode prefix [default: $CELLPREFIX]"
+  echo "  --cellsuffix    Barcode suffix [default: empty]"
+  echo "  --outdir        Output directory [default: current dir]"
+  echo "  --samtools      Samtools path [default: samtools]"
+  echo
+  exit 1
+}
+
+# Argument parsing
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -t) TUMOR="$2"; shift 2;;
+    -n) NORMAL="$2"; shift 2;;
+    -r) REFERENCE="$2"; shift 2;;
+    -b) BINSIZE="$2"; shift 2;;
+    -m) MINREADS="$2"; shift 2;;
+    -j) JOBS="$2"; shift 2;;
+    -c) CHROMS="$2"; shift 2;;
+    -l) CELLSLIST="$2"; shift 2;;
+    --cellprefix) CELLPREFIX="$2"; shift 2;;
+    --cellsuffix) CELLSUFFIX="$2"; shift 2;;
+    --outdir) OUTDIR="$2"; shift 2;;
+    --samtools) SAMTOOLS="$2"; shift 2;;
+    -h|--help) usage;;
+    *) echo "Unknown option: $1"; usage;;
+  esac
+done
+
+# Required checks
+[[ -z "$TUMOR" || -z "$NORMAL" || -z "$REFERENCE" ]] && usage
+
+# Build the command
+CMD="$PYTHON $SCRIPT \
+  -t \"$TUMOR\" \
+  -n \"$NORMAL\" \
+  -r \"$REFERENCE\" \
+  -b \"$BINSIZE\" \
+  -m \"$MINREADS\" \
+  -j \"$JOBS\" \
+  -c \"$CHROMS\" \
+  --cellprefix \"$CELLPREFIX\" \
+  --cellsuffix \"$CELLSUFFIX\" \
+  --outdir \"$OUTDIR\" \
+  --samtools \"$SAMTOOLS\""
+
+# Add cell list if specified
+if [[ -n "$CELLSLIST" ]]; then
+  CMD="$CMD -l \"$CELLSLIST\""
+fi
+
+eval $CMD
