@@ -1,5 +1,5 @@
 process POSTPROCESS_RDR {
-    cpus 1
+    cpus 8
     memory '8 GB'
     label 'process_light'
 
