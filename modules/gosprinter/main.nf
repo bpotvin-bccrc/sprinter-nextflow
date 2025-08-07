@@ -7,6 +7,7 @@ process GOSPRINTER {
     input:
     path chr_input
     path chr_reference_genome
+    path chr_reference_genome_fa
     val sprinter_rtreads
     val sprinter_minreads
     val sprinter_cnreads

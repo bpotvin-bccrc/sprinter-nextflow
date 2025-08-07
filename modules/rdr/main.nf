@@ -6,6 +6,8 @@ process RUNRDRESTIMATOR {
 
     input:
     path reference_genome
+    path reference_genome_fai
+    path reference_genome_dict
     path bam
     path bam_bai
     val chromosomes
