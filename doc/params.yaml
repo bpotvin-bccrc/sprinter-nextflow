@@ -1,7 +1,9 @@
 reference_genome: "./data/gsc_hg19a.fa"
 reference_genome_dict: "./data/gsc_hg19a.dict"
-bam: "./data/AT31022_reference_cells.bam"
-bam_bai: "./data/AT31022_reference_cells.bam.bai"
+normal_bam: "./data/AT31022_reference_cells.bam"
+normal_bam_bai: "./data/AT31022_reference_cells.bam.bai"
+tumor_bam: "./data/AT31022_reference_cells.bam"
+tumor_bam_bai: "./data/AT31022_reference_cells.bam.bai"
 chromosomes: "1"
 rdr_binsize: 50000
 rdr_minreads: 1000
