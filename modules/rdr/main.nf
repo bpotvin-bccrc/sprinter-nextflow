@@ -8,8 +8,10 @@ process RUNRDRESTIMATOR {
     path reference_genome
     path reference_genome_fai
     path reference_genome_dict
-    path bam
-    path bam_bai
+    path normal_bam
+    path normal_bam_bai
+    path tumor_bam
+    path tumor_bam_bai
     val chromosomes
     val rdr_binsize
     val rdr_minreads
@@ -21,13 +23,13 @@ process RUNRDRESTIMATOR {
     """
     runrdr \
         -r "${reference_genome}" \
-        -t "${bam}" \
+        -t "${tumor_bam}" \
         -j ${task.cpus} \
         -m ${rdr_minreads} \
         -b ${rdr_binsize} \
         -c "${chromosomes}" \
         --samtools /opt/conda/envs/rdr_py27/bin/samtools \
-        -n "${bam}" > rdr.tsv
+        -n "${normal_bam}" > rdr.tsv
 
     """
 }
