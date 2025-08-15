@@ -1,7 +1,7 @@
 process GOSPRINTER {
     time '24h'
     cpus 20
-    memory '8 GB'
+    memory '64 GB'
     label 'process_high'
 
     input:
