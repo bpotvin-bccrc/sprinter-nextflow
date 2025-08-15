@@ -14,8 +14,10 @@ def assert_required_param(param, param_name){
 }
 assert_required_param(params.reference_genome, 'reference_genome') //e.g. gsc_hg19a.fa # must have .fa.fai
 assert_required_param(params.reference_genome_dict, 'reference_genome_dict') //e.g. gsc_hg19a.dict
-assert_required_param(params.bam, 'bam') //e.g. AT31022_reference_cells.bam
-assert_required_param(params.bam_bai, 'bam_bai') //e.g. AT31022_reference_cells.bam.bai
+assert_required_param(params.normal_bam, 'normal_bam') //e.g. AT31022_reference_cells.bam
+assert_required_param(params.normal_bam_bai, 'normal_bam_bai') //e.g. AT31022_reference_cells.bam.bai
+assert_required_param(params.tumor_bam, 'tumor_bam') //e.g. AT31022_reference_cells.bam
+assert_required_param(params.tumor_bam_bai, 'tumor_bam_bai') //e.g. AT31022_reference_cells.bam.bai
 assert_required_param(params.chromosomes, 'chromosomes') //e.g. "1 2 3 4 5 6 7 8 9 10 11"
 assert_required_param(params.rdr_binsize, 'rdr_binsize') //e.g. 50000
 assert_required_param(params.rdr_minreads, 'rdr_minreads') //e.g. 100000
@@ -32,8 +34,10 @@ reference_genome_fai = file(params.reference_genome_fai)
 reference_genome_dict = file(params.reference_genome_dict)
 reference_genome_chr = file(params.reference_genome_chr)
 reference_genome_chr_fai = file(params.reference_genome_chr_fai)
-bam = file(params.bam)
-bam_bai = file(params.bam_bai)
+normal_bam = file(params.normal_bam)
+normal_bam_bai = file(params.normal_bam_bai)
+tumor_bam = file(params.tumor_bam)
+tumor_bam_bai = file(params.tumor_bam_bai)
 chromosomes = params.chromosomes
 rdr_binsize = params.rdr_binsize
 rdr_minreads = params.rdr_minreads
@@ -52,8 +56,10 @@ workflow SPRINTER_PIPELINE{
         reference_genome,
         reference_genome_fai,
         reference_genome_dict,
-        bam,
-        bam_bai,
+        normal_bam,
+        normal_bam_bai,
+        tumor_bam,
+        tumor_bam_bai,
         chromosomes,
         rdr_binsize,
         rdr_minreads
