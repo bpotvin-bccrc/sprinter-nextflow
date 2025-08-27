@@ -13,7 +13,8 @@ process GOSPRINTER {
     val sprinter_cnreads
     val sprinter_mincells
     val sprinter_propsphase
-
+    val sprinter_maxploidy
+    
     output:
     path "sprinter_results/*"
 
@@ -30,6 +31,7 @@ process GOSPRINTER {
         --cnreads ${sprinter_cnreads} \
         --minnumcells ${sprinter_mincells} \
         --propsphase ${sprinter_propsphase} \
+        --maxploidy ${sprinter_maxploidy} \
         -j ${task.cpus}
     """
 }

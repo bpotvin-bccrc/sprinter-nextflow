@@ -27,7 +27,8 @@ assert_required_param(params.sprinter_cnreads, 'sprinter_cnreads') //CN reads re
 assert_required_param(params.sprinter_mincells, 'sprinter_mincells') //Min cells
 assert_required_param(params.sprinter_propsphase, 'sprinter_propsphase') //Proportion of S phase
 
-
+// https://github.com/zaccaria-lab/SPRINTER/blob/main/sprinter/bin/sprinter.py
+params.sprinter_maxploidy = params.sprinter_maxploidy ?: 4
 
 reference_genome = file(params.reference_genome)
 reference_genome_fai = file(params.reference_genome_fai)
@@ -46,7 +47,7 @@ sprinter_minreads = params.sprinter_minreads
 sprinter_cnreads = params.sprinter_cnreads
 sprinter_mincells = params.sprinter_mincells
 sprinter_propsphase = params.sprinter_propsphase
-
+sprinter_maxploidy = params.sprinter_maxploidy
 
 workflow SPRINTER_PIPELINE{
 
@@ -75,6 +76,7 @@ workflow SPRINTER_PIPELINE{
         sprinter_minreads,
         sprinter_cnreads,
         sprinter_mincells,
-        sprinter_propsphase
+        sprinter_propsphase,
+        sprinter_maxploidy
     )
 }
